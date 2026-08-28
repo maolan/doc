@@ -2,8 +2,8 @@
 
 The complete Maolan in-house plugin collection. Built in Rust as CLAP plugins with Iced-based GUIs in the TokyoNight theme.
 
-- 18 exported variants
-- 13 distinct products
+- 22 exported variants
+- 17 distinct products
 - Iced TokyoNight GUI
 - BSD-2 license
 
@@ -86,6 +86,70 @@ Waveshape saturation with sine-based distortion and intensity-dependent blend. S
 Plugin ID: `rs.maolan.monitoring`
 
 Monitoring toolbox with 17 reference modes for checking mixes on different playback systems. Stereo I/O.
+
+## Modulation & Vocal Effects
+
+Chorus, phaser, formant filtering, and vocoding.
+
+### Chorus
+
+Plugin ID: `rs.maolan.chorus`
+
+Multi-voice stereo chorus with modulated delay lines. Even voices read from the left channel and odd voices from the right, producing a wide stereo image.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Mod Depth | 0.0 ... 10.0 ms | 5.0 | LFO delay modulation depth |
+| Mod Rate | 0.1 ... 5.0 Hz | 0.5 | LFO rate |
+| Dry/Wet | 0.0 ... 1.0 | 0.5 | Mix balance |
+| Voices | 2 ... 16 | 8 | Number of chorus voices |
+
+### Phaser
+
+Plugin ID: `rs.maolan.phaser`
+
+Modulated all-pass cascade phaser. The LFO sweeps the center frequency of up to 12 first-order all-pass stages. Feedback can be taken from the previous output or from a configurable delay line.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| LFO Rate | 0.01 ... 2.0 Hz | 0.1 | LFO rate |
+| LFO Depth | 0.0 ... 1.0 | 0.5 | LFO modulation depth |
+| Manual (Center) | 0.0 ... 1.0 | 0.5 | Manual center position |
+| Feedback | −0.98 ... 0.98 | 0.0 | Feedback amount |
+| Feedback Delay On | 0 / 1 | 0 | Use delay-line feedback instead of previous output |
+| Delay Time | 0.0 ... 20.0 ms | 1.0 | Feedback delay time |
+| Stages (All-pass) | 1 ... 12 | 12 | Number of all-pass stages |
+
+### Formant
+
+Plugin ID: `rs.maolan.formant`
+
+Vowel formant filter using three constant-Q bandpass biquads per channel. The Vowel control crossfades between the A, E, I, O, and U vowel tables for continuous timbre shaping.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Vowel (A-E-I-O-U) | 0.0 ... 4.0 | 0.0 | Vowel selector with interpolation |
+| Sharpness (Q) | 2.0 ... 40.0 | 2.0 | Bandpass filter Q |
+| Output Gain | −60.0 ... 20.0 dB | 0.0 | Output gain |
+
+### Vocoder
+
+Plugin ID: `rs.maolan.vocoder`
+
+24-band filter-bank vocoder. Each band has its own envelope follower that shapes the band-limited signal before summing. Spectral Shift transposes the entire filter bank.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Spectral Shift | 0.5 ... 4.0 | 0.5 | Filter-bank frequency shift multiplier |
+| Dry/Wet | 0.0 ... 1.0 | 1.0 | Mix balance |
 
 ## Instruments & Modeling
 
