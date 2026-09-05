@@ -302,7 +302,7 @@ Expected model assets:
 - Collect/consolidate external media and plugin file references into the session's `data/` directory
 - Delete unused session media files from `audio/`, `midi/`, `peaks/`, and `pitch/`
 - Clips deleted from tracks are kept in a session-level unused pool (shown in the Clips pane) until **File → Delete unused files** removes them permanently
-- CLAP and LV2 file-reference support: plugins can declare external file references and Maolan updates them to session-relative `data/` paths on consolidate
+- CLAP and LV2 resource-directory support: plugins can declare a resource directory and copy their external files into it on consolidate; Maolan rewrites saved plugin state to session-relative `data/` paths so projects stay relocatable
 - Consolidation makes sessions safer to move or share
 
 ## Session Safety and Recovery

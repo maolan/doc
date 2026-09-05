@@ -351,10 +351,10 @@ the transport position are sent as first-class request metadata.
 
 ## Media Consolidation and File References
 
-Maolan can collect external media files into the session directory and update plugin file references to keep sessions portable.
+Maolan can collect external media files into the session directory and consolidate plugin resources to keep sessions portable.
 
-- **File → Consolidate** copies imported audio/MIDI files and any CLAP/LV2 plugin file references into the session's `data/` directory.
-- Consolidation updates plugin file references to absolute paths immediately, and saved plugin state is rewritten to relative `data/` paths on save.
+- **File → Consolidate** copies imported audio/MIDI files into the session's `data/` directory, points CLAP/LV2 plugins at that directory, and asks CLAP plugins (via the `clap.resource-directory` draft extension) to copy the external files they reference into it.
+- Consolidated plugin state is rewritten to relative `data/` paths on save.
 - **File → Delete unused files** scans `audio/`, `midi/`, `peaks/`, and `pitch/` and removes files not referenced by the current session or any non-hidden branch JSON. Unused clips (deleted from tracks but kept in the Clips pane's Unused section) are permanently removed first when no session slot of the current branch references them and no other branch file references their media; clips still used in the live or edit view of any session file stay in the Unused section.
 - Consolidation makes it safer to move or share a session directory.
 

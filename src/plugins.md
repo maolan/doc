@@ -155,9 +155,9 @@ Plugin ID: `rs.maolan.vocoder`
 
 Drum sampling and neural amp modeling.
 
-### Drust
+### Maolan Drums
 
-Plugin ID: `rs.maolan.drust`
+Plugin ID: `rs.maolan.drums`
 
 Drum sampler CLAP plugin inspired by DrumGizmo. Async kit loading, MIDI triggering, velocity mapping, round-robin, humanization, per-output balancing, and built-in limiter. 16 mono outputs (Kick L/R, Snare L/R, HiHat L/R, Toms L/R, Ride L/R, Crash L/R, China/Splash L/R, Ambience L/R).
 
@@ -178,9 +178,39 @@ Polyphonic sample player supporting **SFZ (v1/v2)** and **SoundFont 2 (SF2.01/SF
 - **Background Loading:** Instrument parsing and resample rendering occur asynchronously on a background worker thread. New patches swap into the audio engine atomically (`AtomicArc`) without interrupting active voices or causing audio dropouts.
 - **Interactive GUI:** Supports drag-and-drop file loading, bank/preset dropdown selection, real-time loading progress indicator, instant reload button for SFZ editing, and scrollable diagnostic error logging.
 
-### Rural Modeler
+### Synth
 
-Plugin ID: `rs.maolan.ruralmodeler`
+Plugin ID: `rs.maolan.synth`
+
+Polyphonic synthesizer inspired by Surge XT. Features three oscillators with multiple synthesis
+modes (including wavetable, FM, and physical-modeling flavors), two multimode filters with
+configurable routing, three envelopes, six LFOs, a 12-slot modulation matrix, an MSEG, a step
+sequencer, noise and waveshaper sections, and microtonal tuning support. Stereo I/O.
+
+**Parameter groups**
+
+| Group | Description |
+|-------|-------------|
+| Osc1–Osc3 | Type, octave, semitone, fine, shape, skew, formant, level, unison, sync, sub, routing, solo/mute |
+| Filter1–Filter2 | Type, subtype, cutoff, resonance, EG amount, key tracking, drive, feedback, enable |
+| Filter | Filter routing and balance |
+| AmpEG / FilterEG / PitchEG | Attack, decay, sustain, release, mode, shapes, retrigger, tempo sync, uber release |
+| LFO1–LFO6 | Rate, shape, amount, deform, trigger, sync mode/division, envelope, phase, unipolar |
+| Mod | Fixed mod depths (velocity/key/LFO to filter, mod wheel/aftertouch to filter) |
+| ModRoute1–12 | Source, target, depth, curve |
+| Noise | Type, level, color, filter, stereo, enabled |
+| Waveshaper | Shape, drive, mix, enable |
+| Flavor | Additional filter-like flavor stage |
+| Step Seq | 16 step values, loop start/end, shuffle, trigger targets |
+| MSEG | 128 nodes, 127 segment curves, loop, retrigger targets |
+| Macros | Macro1–8 modulation sources |
+| Master | Volume, pan, width, polyphony, portamento, pitch-bend range, play mode, voice priority |
+| Tuning | Scale, root, SCL index |
+| FM / Twist / String / Alias | Oscillator-specific parameters for FM, twist, string, and alias engines |
+
+### Maolan Modeler
+
+Plugin ID: `rs.maolan.modeler`
 
 Neural Amp Modeler (NAM) plugin. Loads neural network amp models and impulse responses. Includes a noise gate, tone stack (Bass/Mid/Treble), input/output calibration, and DC blocking. Mono I/O.
 

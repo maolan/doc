@@ -248,9 +248,11 @@ SysEx JSON format:
 - `/plugin/snapshot_state s s i`
 - `/plugin/restore_state s s i s` — JSON state (`{"bytes":[...]}` for CLAP,
   `{"plugin_id":"...","component_state":[...],"controller_state":[...]}` for VST3)
-- `/plugin/set_resource_dir s s i s`
-- `/plugin/update_file_reference s s i i s` — track_name, format, instance_id,
-  file_index, path
+- `/plugin/set_resource_dir s s i s [i]` — track_name, format, instance_id,
+  directory, optional shared flag (`0`/`1`, default `1`)
+- `/plugin/collect_resources s s i` — track_name, format, instance_id; CLAP only.
+  Asks the plugin to copy its external files into the resource directory set by
+  `set_resource_dir`
 - `/plugin/connect_audio s s i s i`
 - `/plugin/disconnect_audio s s i s i`
 - `/plugin/connect_midi s s i s i`
@@ -259,8 +261,9 @@ SysEx JSON format:
 - `/clip_plugin/set_param s s i i i f`
 - `/clip_plugin/snapshot_state s s i i`
 - `/clip_plugin/restore_state s s i i s`
-- `/clip_plugin/set_resource_dir s s i i s`
-- `/clip_plugin/update_file_reference s s i i i s`
+- `/clip_plugin/set_resource_dir s s i i s [i]` — directory plus optional shared
+  flag (default `1`)
+- `/clip_plugin/collect_resources s s i i` — CLAP only; see `/plugin/collect_resources`
 
 Plugin graph node strings:
 
@@ -478,7 +481,8 @@ cargo run --bin maolan-osc -- step_recording 1
 cargo run --bin maolan-osc -- plugin show_gui "Drums" clap 0
 cargo run --bin maolan-osc -- plugin snapshot_state "Drums" clap 0
 cargo run --bin maolan-osc -- plugin restore_state "Drums" clap 0 '{"bytes":[1,2,3]}'
-cargo run --bin maolan-osc -- plugin update_file_reference "Drums" clap 0 0 "/tmp/sample.wav"
+cargo run --bin maolan-osc -- plugin set_resource_dir "Drums" clap 0 "/path/to/session/data" 1
+cargo run --bin maolan-osc -- plugin collect_resources "Drums" clap 0
 
 cargo run --bin maolan-osc -- clip_plugin snapshot_state "Drums" clap 0 0
 ```
