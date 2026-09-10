@@ -349,7 +349,8 @@ Expected model assets:
 ## Platform Notes
 
 - Linux and FreeBSD builds support CLAP, VST3, and LV2.
-- Windows builds support WSAPI backend, CLAP, and VST3.
+- macOS builds use the CoreAudio backend and support CLAP and VST3.
+- Windows builds support WASAPI backend, CLAP, and VST3.
 - LV2 is Unix-only in the current codebase.
 - Linux and FreeBSD builds run on Wayland when available and fall back to X11 (Xorg) when Wayland is unavailable.
 - Plugin UI embedding on Unix still uses X11, so an X11 server must be reachable even under Wayland (for example via XWayland).

@@ -88,14 +88,15 @@ Yes. Maolan is completely free and open source with no licensing fees, subscript
 
 ### Which platforms are supported?
 
-Maolan supports Linux, FreeBSD, and Windows.
+Maolan supports Linux, FreeBSD, macOS, and Windows.
 
 - Linux and FreeBSD builds run on Wayland when available and fall back to X11 (Xorg) when Wayland is unavailable. Plugin UI embedding still uses X11, so an X11 server must be reachable even under Wayland (for example via XWayland).
-- - Windows uses WASAPI for audio and the Win32 API for windowing.
+- macOS uses CoreAudio for audio and CoreMIDI for MIDI.
+- Windows uses WASAPI for audio and the Win32 API for windowing.
 
 ### Which plugin formats are supported?
 
-Maolan supports CLAP, VST3, and LV2 on Linux and FreeBSD. Windows builds support CLAP and VST3. LV2 remains Unix-only. All supported formats use per-process plugin hosting for crash isolation.
+Maolan supports CLAP, VST3, and LV2 on Linux and FreeBSD. macOS and Windows builds support CLAP and VST3. LV2 remains Unix-only. All supported formats use per-process plugin hosting for crash isolation.
 
 ### How does autosave and recovery work?
 

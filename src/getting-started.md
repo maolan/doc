@@ -1,6 +1,6 @@
 # Getting Started
 
-Maolan is currently available for FreeBSD, Linux, and Windows.
+Maolan is currently available for FreeBSD, Linux, macOS, and Windows. Prebuilt packages are provided for FreeBSD, Linux, and Windows; on macOS build from source.
 
 ## Download
 
@@ -51,8 +51,10 @@ cargo build --workspace --release
 
 ### Platform prerequisites
 
-- **Linux / FreeBSD:** `pkg-config`, JACK/ALSA dev packages, `liblilv-dev`, `libsuil-dev`, `libgtk2.0-dev`, FFmpeg libraries, LLVM/Clang (for bindgen).
-- **Windows:** Visual Studio Build Tools, LLVM/Clang, NSIS, vcpkg packages (`sentencepiece:x64-windows`), FFmpeg NuGet package. See `maolan/scripts/build.ps1` and `plugins/build.ps1` for the automated setup.
+- **Linux:** `pkg-config`, ALSA dev packages, and JACK dev packages if you want the JACK backend.
+- **FreeBSD:** `pkg-config` and the JACK dev package if you want the JACK backend; the OSS backend uses the in-kernel OSS API (no extra packages).
+- **macOS:** Xcode Command Line Tools (provides the linker and system headers). Audio I/O is CoreAudio and MIDI is CoreMIDI, both accessed directly with no extra libraries.
+- **Windows:** Visual Studio Build Tools with the C++ workload. NSIS is only needed to build the installer. See `maolan/scripts/build.ps1` and `plugins/build.ps1` for the automated setup.
 
 ## Next Steps
 

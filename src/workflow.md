@@ -11,6 +11,7 @@ Last updated: 2026-07-09
 - not the Unix LV2 host path.
 - Plugin discovery runs automatically on startup:
   - Linux / FreeBSD: LV2, VST3, CLAP
+  - macOS / Windows: VST3, CLAP
 - Plugin discovery path overrides:
   - `CLAP_PATH`: additional CLAP scan roots (path-list format, platform separator)
   - `VST3_PATH`: additional VST3 scan roots (path-list format, platform separator)

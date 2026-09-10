@@ -448,7 +448,7 @@ cargo run --bin maolan-osc -- track arm "Vocals" 1
 cargo run --bin maolan-osc -- connect "Kick" 0 "Drums" 0 audio
 cargo run --bin maolan-osc -- disconnect "Kick" 0 "Drums" 0 audio
 
-cargo run --bin maolan-osc -- plugin load "Drums" clap "rs.maolan.widener"
+cargo run --bin maolan-osc -- plugin load "Drums" clap "rs.maolan.stereo"
 cargo run --bin maolan-osc -- plugin bypass "Drums" clap 0 1
 cargo run --bin maolan-osc -- plugin connect_audio "Drums" track_input 0 clap_0 0
 cargo run --bin maolan-osc -- plugin set_param "Drums" clap 0 0 0.75
