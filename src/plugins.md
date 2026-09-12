@@ -145,14 +145,6 @@ Plugin ID: `rs.maolan.limiter`
 
 Adaptive clipper/limiter with Vintage and Modern variants. Multiple limiting modes from subtle attenuation to aggressive clipping. Stereo I/O.
 
-### Monitoring
-
-![Monitoring GUI](images/effects/monitoring.png)
-
-Plugin ID: `rs.maolan.monitoring`
-
-Monitoring toolbox with 17 reference modes for checking mixes on different playback systems. Stereo I/O.
-
 ### Parametric EQ
 
 ![Parametric EQ GUI](images/effects/eq.png)
