@@ -264,36 +264,9 @@ Resonant wah-wah filter with pedal, LFO, and envelope follower modes. The filter
 | LFO Shape | 0.0 ... 3.0 | 0.0 | LFO waveform |
 | Env Attack | 1.0 ... 500.0 | 20.0 | Envelope follower attack time |
 
-## Per-Process Plugin Hosting
-
-Each plugin instance runs in its own isolated OS process. A plugin crash cannot bring down the DAW or stop playback on other tracks.
-
-### Crash Isolation
-
-If a plugin segfaults, the OS kills only its host process. The DAW detects the death, mutes the track, and continues playback for all other tracks without interruption.
-
-### Shared-Memory IPC
-
-Audio buffers are exchanged through memory-mapped shared memory (<200 µs round-trip per block). Lock-free ring buffers carry parameters, MIDI, and transport state without blocking the real-time audio thread.
-
-### DAW-Owned Scheduling
-
-The DAW controls how many worker threads each plugin process may use per audio block. Plugins request work via `clap_host_thread_pool`; the DAW decides based on global CPU load, eliminating core collisions.
-
-### Sample-Accurate Automation
-
-Parameter changes carry an exact sample offset within each block. Automation curves are subdivided into per-sample events and delivered through the IPC ring buffer with no smoothing layer added by the host.
-
-### Format Coverage
-
-Out-of-process hosting covers CLAP, VST3, and LV2. CLAP gets native thread-pool sharing; VST3 and LV2 run as single-threaded workers with the same IPC protocol and crash recovery path.
-
-### Windows Support
-
-The IPC layer uses `CreateFileMapping` on Windows and `shm_open` on Unix. Plugin processes are spawned with `CreateProcess` and GUI embedding uses `SetParent`. CLAP and VST3 are supported on Windows and macOS; LV2 remains Unix-only.
-
 ## Plugin Format
 
 All Maolan plugins are distributed as CLAP (CLever Audio Plugin) binaries with embedded Iced GUIs. They support Linux, FreeBSD, macOS, and Windows.
 
-The plugin collection is developed in the [plugins](https://github.com/maolan/plugins) repository. UI windowing is handled by [baseview](https://github.com/maolan/baseview), a low-level window system interface for audio plugin UIs.
+The plugin collection is developed in the [plugins](https://github.com/maolan/plugins) repository. UI windowing is handled by [baseview](https://github.com/maolan/baseview), a low-level window system interface for audio plugin UIs. Extra widgets are implemented as part of
+[maolan-widgets](https://github.com/maolan/widgets) repository.
