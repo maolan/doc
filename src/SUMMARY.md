@@ -1,8 +1,6 @@
 # Summary
 
 [Introduction](./README.md)
-
-- [Getting Started](./getting-started.md)
 - [Features](./features.md)
 - [Workflow](./workflow.md)
 - [Plugin Routing and Sidechains](./routing.md)

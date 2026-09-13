@@ -172,10 +172,6 @@ The in-app Clips pane can be shown or hidden with `C` or via **View → Clips**.
 
 Deleting a clip from a track does not discard it: the clip moves to the "Unused" section at the bottom of the Clips pane and stays part of the session. A clip counts as unused only when it is used in neither the edit view (no track holds it) nor the live view (no session slot references it) — a clip removed from the timeline but still assigned to a session slot keeps playing in the live view and does not appear in the Unused section until the slot is cleared. Clips in the pane can be dragged onto a track in the editor (placed at the drop position, using the current snap mode): dragging a track's clip copies it with a fresh id, while dragging an unused clip moves it out of the Unused section. Pane clips can also be dragged directly onto a session slot in the live view to assign them to that slot. Re-adding an unused clip to a track via undo also removes it from the Unused section. **File → Delete unused files** permanently removes an unused clip — from the pane and from the session — and deletes its media, but only when no session slot of the current branch references the clip and no other branch/session file still references its media.
 
-## maolan-cli
-
-Maolan also ships a `maolan-cli` binary that can play, pause, stop, send panic, and export the current session.
-
 ## Notes
 
 - Current keyboard handling is `Ctrl`-based in code paths.

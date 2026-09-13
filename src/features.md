@@ -360,3 +360,53 @@ Expected model assets:
 
 - Plugin compatibility is still a real-world host-interop concern, especially across unusual plugins.
 - Many core behaviors are unit-tested, but editor-hosting and plugin-integration paths are still more integration-heavy than fixture-heavy.
+
+## Frequently Asked Questions
+
+### Is Maolan free?
+
+Yes. Maolan is completely free and open source with no licensing fees, subscriptions, or paywalls.
+
+### Which platforms are supported?
+
+Maolan supports Linux, FreeBSD, macOS, and Windows.
+
+- Linux and FreeBSD builds run on Wayland when available and fall back to X11 (Xorg) when Wayland is unavailable. Plugin UI embedding still uses X11, so an X11 server must be reachable even under Wayland (for example via XWayland).
+- macOS uses CoreAudio for audio and CoreMIDI for MIDI.
+- Windows uses WASAPI for audio and the Win32 API for windowing.
+
+### Which plugin formats are supported?
+
+Maolan supports CLAP, VST3, and LV2 on Linux and FreeBSD. macOS and Windows builds support CLAP and VST3. LV2 remains Unix-only. All supported formats use per-process plugin hosting for crash isolation.
+
+### How does autosave and recovery work?
+
+Maolan writes autosave snapshots every 15 seconds into `.maolan_autosave/snapshots/` beside the live session, for example:
+
+`<session>/.maolan_autosave/snapshots/<timestamp>/`
+
+When opening a session, Maolan can detect a newer snapshot, preview the differences, and recover the latest valid autosave first.
+
+### Does Maolan support templates?
+
+Yes. Session templates preserve track structure, routing, plugin graphs, plugin state, metadata, and export settings. Track templates preserve one track's settings, plugin graph, plugin state, and that track's connections, while intentionally leaving out audio and MIDI clips.
+
+### How can I contribute?
+
+There are many ways to contribute to Maolan:
+
+- **Code:** Submit pull requests for features, bug fixes, or improvements
+- **Documentation:** Help improve guides, tutorials, and API docs
+- **Testing:** Report bugs, test features, and provide feedback
+- **Design:** Contribute UI/UX improvements and design ideas
+- **Community:** Help other users, answer questions, and promote the project
+
+Visit the GitHub repository to get started. All contributors are welcome!
+
+### Can I reuse it in my Rust project?
+
+Maolan is a two-part project: engine and GUI. The engine is independent of the GUI and can be reused in your own Rust project.
+
+```bash
+cargo add maolan_engine
+```
