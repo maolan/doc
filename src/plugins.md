@@ -2,8 +2,8 @@
 
 The complete Maolan in-house plugin collection. Built in Rust as CLAP plugins with Iced-based GUIs in the TokyoNight theme.
 
-- 21 exported variants
-- 20 distinct products
+- 23 exported variants
+- 22 distinct products
 - Iced TokyoNight GUI
 - BSD-2 license
 
@@ -25,13 +25,17 @@ Plugin ID: `rs.maolan.kick`
 
 Percussive synthesizer with layered oscillators and noise. MIDI note-triggered with 16 mono outputs, velocity sensitivity, and a multi-layer DSP engine. Suitable for designing kick and percussion sounds from scratch without sample content.
 
-### Modeler
+### Random
 
-![Modeler GUI](images/instruments/modeler.png)
+![Random GUI](images/effects/random.png)
 
-Plugin ID: `rs.maolan.modeler`
+Plugin ID: `rs.maolan.random`
 
-Neural Amp Modeler (NAM) plugin. Loads neural network amp models and impulse responses. Includes a noise gate, tone stack (Bass/Mid/Treble), input/output calibration, and DC blocking. Mono I/O.
+A singing practice MIDI source that emits a random reference pitch, pauses for you to sing it back, and repeats while the session transport plays. It generates MIDI notes within the selected range (C3 to C5 by default), with no consecutive repeated pitches unless the range contains only one note. No MIDI input or audio output is needed.
+
+The **Note length** and **Pause length** dropdowns control their durations independently: 1/16, 1/8, 1/4, 1/2, or whole notes, and 1, 2, or 4 bars. Both default to one bar. Note values follow the session tempo; bars also follow its time signature (one bar is three quarter notes in 3/4 or six eighth notes in 6/8). Stopping sends a MIDI note-off if a generated note is active; starting begins a new note and pause cycle. Generated MIDI notes use channel 1 and velocity 100. Route the MIDI output to an instrument to hear the reference pitch.
+
+**Lowest note** and **Highest note** set the inclusive pitch range, using note names from C-1 to G9 (middle C is C4). The dropdowns keep the lowest note at or below the highest note. Choose the same note in both to practice one pitch repeatedly. Range changes apply to the next note, and all four settings are saved with the session.
 
 ### Sampler
 
@@ -137,6 +141,46 @@ Vowel formant filter using three constant-Q bandpass biquads per channel. The Vo
 | Sharpness (Q) | 2.0 ... 40.0 | 2.0 | Bandpass filter Q |
 | Output Gain | −60.0 ... 20.0 dB | 0.0 | Output gain |
 
+### Flanger
+
+![Flanger GUI](images/effects/flanger.png)
+
+Plugin ID: `rs.maolan.flanger`
+
+Stereo flanger with LFO-modulated delay lines and a separate feedback path, ported from LSP Plugins' Flanger Stereo algorithm. Offers 13 LFO shapes (plus off) with independent right-channel LFO, tempo-synced rate, wrap crossfading, mid/side processing, and feedback with drive and delay. The Stereo switch selects stereo (2 audio ports, default) or mono (1 audio port) I/O and asks the host to rescan audio ports when changed; the stereo-only parameters (LFO 2, Phase difference L/R, Mid/Side) apply when Stereo is on.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Stereo | Off / On | On | Switch between stereo (2 audio ports) and mono (1 audio port) I/O |
+| Rate | 0.01 ... 20.0 Hz | 0.25 | LFO rate |
+| Tempo | 20 ... 360 BPM | 120 | Tempo for tempo time mode |
+| Tempo Sync | Off / On | Off | Read BPM from host transport |
+| Time Mode | Rate / Tempo | Rate | How the LFO rate is determined |
+| Time Fraction | 1/64 ... 8 | 1 | Note fraction for tempo mode |
+| Crossfade | 0 ... 50 % | 0 | Wrap crossfade length (fraction of half cycle) |
+| Crossfade Type | Const power / Linear | Const power | Audible crossfade law (feedback always linear) |
+| LFO Type | 13 shapes + Off | Triangular | Left channel LFO shape |
+| LFO Period | Full / First / Last | Full | Portion of the LFO cycle used |
+| LFO2 Type | Same + 13 shapes + Off | Same | Right channel LFO shape |
+| LFO2 Period | Full / First / Last | Full | Right channel LFO period |
+| Initial Phase | 0 ... 360° | 0 | LFO phase after reset |
+| Phase Diff L/R | 0 ... 360° | 0 | Phase shift between channels |
+| Reset Phase | trigger | — | Restart the LFO at the initial phase |
+| Mid/Side | Off / On | Off | Process mid and side independently |
+| Min Depth | 0.01 ... 10.0 ms | 0.25 | Minimum delay |
+| Depth | 0.1 ... 20.0 ms | 2.0 | LFO delay sweep depth |
+| Signal Phase | Off / On | Off | Invert the wet signal polarity |
+| Feedback On | Off / On | Off | Enable the feedback path |
+| Feedback Gain | 0.0 ... 0.89125 | 0.5 | Feedback amount (−6 dB default) |
+| Feedback Drive | 0.0 ... 1.0 | 0.0 | Input drive into the feedback path |
+| Feedback Delay | 0.0 ... 5.0 ms | 0.0 | Extra feedback path delay |
+| Feedback Phase | Off / On | Off | Invert feedback gain and drive |
+| Input Gain | −24.0 ... 24.0 dB | 0.0 | Input gain |
+| Dry/Wet | 0.0 ... 1.0 | 0.5 | Dry/wet mix balance |
+| Output Gain | −24.0 ... 24.0 dB | 0.0 | Output gain |
+
 ### Limiter
 
 ![Limiter GUI](images/effects/limiter.png)
@@ -144,6 +188,14 @@ Vowel formant filter using three constant-Q bandpass biquads per channel. The Vo
 Plugin ID: `rs.maolan.limiter`
 
 Adaptive clipper/limiter with Vintage and Modern variants. Multiple limiting modes from subtle attenuation to aggressive clipping. Stereo I/O.
+
+### Modeler
+
+![Modeler GUI](images/effects/modeler.png)
+
+Plugin ID: `rs.maolan.modeler`
+
+Neural Amp Modeler (NAM) plugin. Loads neural network amp models and impulse responses. Includes a noise gate, tone stack (Bass/Mid/Treble), input/output calibration, and DC blocking. Mono I/O.
 
 ### Parametric EQ
 
@@ -226,6 +278,14 @@ Monophonic pitch tuner using the YIN algorithm. Adjustable reference pitch and c
 |-----------|-------|---------|-------------|
 | Reference Hz | 420.0 ... 460.0 | 440.0 | Tuning reference frequency |
 | Clarity Threshold | 0.0 ... 1.0 | 0.7 | Minimum clarity for pitch detection |
+
+### VU
+
+![VU GUI](images/effects/vu.png)
+
+Plugin ID: `rs.maolan.vumeter`
+
+Stereo VU meter for diagnostics. Two audio inputs (Left/Right) with ballistics-style VU displays and no parameters. Use it to monitor signal levels on any channel.
 
 ### Vocoder
 
