@@ -2,6 +2,7 @@
 
 [Introduction](./introduction.md)
 - [Audio Latency Calibration](./calibration.md)
+- [DAW](./daw.md)
 - [OSC Control Surface](./osc.md)
 - [Maolan Plugins](./plugins.md)
 - [MixOSC](./mixosc.md)

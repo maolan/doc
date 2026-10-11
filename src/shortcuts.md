@@ -1,6 +1,6 @@
 # Maolan Shortcuts and Gestures
 
-Last updated: 2026-08-12
+Last updated: 2026-10-10
 
 ## Keyboard Shortcuts
 
@@ -46,6 +46,10 @@ Last updated: 2026-08-12
 - `Q`: Quantize selected notes
 - `H`: Humanize selected notes
 - `G`: Groove selected notes
+
+### Audio Editor
+
+- `Escape`: Close the audio editor (same as the toolbar × button); when an editor dialog is open, the dialog is cancelled instead
 
 ## Mouse Actions and Gestures
 
