@@ -42,10 +42,16 @@ memory and lightweight inter-process events. Keeping plugin code outside the
 DAW process means a plugin crash can be isolated: the engine can detect the
 failed host, bypass that plugin, and keep the main application running.
 
-## Using the engine
+## Using the engine from another application
 
-Applications communicate with the engine through its message interface to
-open devices, control transport, edit tracks, and receive events. The engine
-crate also exposes reusable modules for audio codecs, MIDI, routing, plugin
-interfaces, render plans, and worker execution. Its public API and available
-platform-specific modules are documented in the `maolan-engine` crate.
+`maolan-engine` is an independent Rust crate that applications can add as a
+Cargo dependency. A host application can provide its own interface and use
+the engine for device IO, audio and MIDI processing, routing, plugin hosting,
+and offline rendering without embedding the Maolan DAW interface.
+
+Applications control the engine through its message interface: send requests
+to open devices, control transport, and edit tracks, then handle the resulting
+events and state updates. The crate also exposes reusable modules for audio
+codecs, MIDI, routing, plugin interfaces, render plans, and worker execution.
+Consult the `maolan-engine` crate documentation for the public API and
+platform-specific modules available to your application.

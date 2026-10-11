@@ -1,7 +1,5 @@
 # Maolan Shortcuts and Gestures
 
-Last updated: 2026-10-10
-
 ## Keyboard Shortcuts
 
 ### Global / Session
