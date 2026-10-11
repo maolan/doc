@@ -35,12 +35,12 @@ for the selected device.
 
 ## Plugin hosting
 
-CLAP, VST3, and (on Unix systems) LV2 plugins run in separate host processes,
-one process per plugin instance. The engine and plugin host exchange audio,
-MIDI, parameter, and state data through shared memory and lightweight
-inter-process events. Keeping plugin code outside the DAW process means a
-plugin crash can be isolated: the engine can detect the failed host, bypass
-that plugin, and keep the main application running.
+CLAP, VST3, LV2 (on Unix systems), and Audio Unit (on macOS) plugins run in
+separate host processes, one process per plugin instance. The engine and
+plugin host exchange audio, MIDI, parameter, and state data through shared
+memory and lightweight inter-process events. Keeping plugin code outside the
+DAW process means a plugin crash can be isolated: the engine can detect the
+failed host, bypass that plugin, and keep the main application running.
 
 ## Using the engine
 

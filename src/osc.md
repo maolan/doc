@@ -137,7 +137,8 @@ History is intentionally not exposed over OSC.
 - `/track/disconnect_midi s s i s i`
 
 Connectable node strings: `"track_input"`, `"track_output"`,
-`"child:<name>"`, `"clap_<id>"`, `"vst3_<id>"`, `"lv2_<id>"`.
+`"child:<name>"`, `"clap_<id>"`, `"vst3_<id>"`, `"lv2_<id>"`, and
+`"au_<id>"` (macOS).
 
 ### Routing
 
@@ -240,7 +241,8 @@ SysEx JSON format:
 
 ### Plugins
 
-- `/plugin/load s s s` — track_name, format (`"clap"`, `"vst3"`, `"lv2"`), plugin ID
+- `/plugin/load s s s` — track_name, format (`"clap"`, `"vst3"`, `"lv2"`, or
+  `"au"`), plugin ID. AU is available on macOS; LV2 is available on Unix.
 - `/plugin/unload s s s`
 - `/plugin/unload_instance s s i`
 - `/plugin/bypass s s i i` — track_name, format, instance_id, bypassed
@@ -258,7 +260,7 @@ SysEx JSON format:
 - `/plugin/connect_midi s s i s i`
 - `/plugin/disconnect_midi s s i s i`
 - `/plugin/set_param s s i i f`
-- `/clip_plugin/set_param s s i i i f`
+- `/clip_plugin/set_param s s i i i f` — format supports CLAP, LV2, and AU (AU on macOS)
 - `/clip_plugin/snapshot_state s s i i`
 - `/clip_plugin/restore_state s s i i s`
 - `/clip_plugin/set_resource_dir s s i i s [i]` — directory plus optional shared
@@ -272,6 +274,7 @@ Plugin graph node strings:
 - `"clap_<instance_id>"`
 - `"vst3_<instance_id>"`
 - `"lv2_<instance_id>"`
+- `"au_<instance_id>"` (macOS)
 
 ### Automation
 

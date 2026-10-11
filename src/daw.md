@@ -40,7 +40,7 @@ Maolan hosts plugins on tracks and, for supported audio clips, within a clip's p
 
 In the graph, drag between compatible ports to route signal through plugins or around them. Move plugin nodes to organize the graph; their positions are retained for the track. Double-click a plugin node to open its plugin interface. Select connection lines to manage plugin routing. This graph is useful for serial or parallel processing, and for checking whether a plugin's inputs and outputs are connected as intended.
 
-The Plugin List is the place to browse and manage the plugins used by a track. Maolan's supported formats depend on the operating system: Unix builds support CLAP, VST3, and LV2; Windows supports CLAP and VST3. Plugin compatibility and interface behavior depend on the plugin and host, and may vary. Track and clip plugin graphs are distinct: a track graph processes that track's signal, while a clip graph stores processing with the clip.
+The Plugin List is the place to browse and manage the plugins used by a track. Maolan's supported formats depend on the operating system: Unix builds support CLAP, VST3, and LV2; macOS also supports Audio Units (AU); Windows supports CLAP and VST3. Plugin compatibility and interface behavior depend on the plugin and host, and may vary. Track and clip plugin graphs are distinct: a track graph processes that track's signal, while a clip graph stores processing with the clip.
 
 ## Working With Clips
 

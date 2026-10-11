@@ -22,9 +22,10 @@ material in a more immediate, performance-oriented setting.
 ## Plugins and audio devices
 
 Maolan supports the CLAP and VST3 plugin formats on its supported platforms,
-and LV2 on Unix systems. Plugins run in separate host processes, which helps
-keep a plugin failure from taking down the main application. Compatibility
-depends on the plugin and platform, and support continues to evolve.
+LV2 on Unix systems, and Audio Units (AU) on macOS. Plugins run in separate
+host processes, which helps keep a plugin failure from taking down the main
+application. Compatibility depends on the plugin and platform, and support
+continues to evolve.
 
 Audio device support varies by operating system. Maolan uses ALSA and JACK on
 Linux, OSS and JACK on FreeBSD, CoreAudio on macOS, and WASAPI on Windows.
