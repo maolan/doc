@@ -205,6 +205,12 @@ Plugin ID: `rs.maolan.equalizer`
 
 32-band parametric equalizer using peaking biquad filters. Each band has independent Frequency, Gain, Q, Type, Slope, and Dynamics controls. Middle-drag a selected bell band dot to create or adjust its dynamic range target. Input and output gain with global bypass. Mono or stereo I/O depending on host channel count.
 
+**Using the EQ graph**
+
+- Double-click an empty spot in the graph to create a bell band there. The horizontal position sets its frequency and the vertical position sets its gain. The new band is selected; drag its node to adjust frequency and gain. Hold Shift while dragging the node vertically to adjust Q.
+- To add dynamics to a selected bell band, middle-drag its node vertically. The node's starting level sets the threshold; the drag position sets the dynamic target. The band then responds when its detected level crosses the threshold. Middle-drag again to adjust the target. Dynamic targets are available for bell bands.
+- To remove the selected band, click **Delete**.
+
 ### Phaser
 
 ![Phaser GUI](images/effects/phaser.png)
