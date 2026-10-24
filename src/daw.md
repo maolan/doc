@@ -2,11 +2,21 @@
 
 Maolan provides two ways to work with a session: the **Workspace** for arranging and mixing over time, and the **Live Session** view for launching clips in scenes. The **Connections** view shows the session's signal routing as a graph. These views use the same tracks and clips, so edits and playback state carry across them.
 
+## Consolidating plugin files
+
+Use **Consolidate** in a saved session to collect resources from supported plugins
+into the session's `data/` directory. For Maolan Modeler this includes the NAM
+model, impulse response, and their pictures. Consolidation waits for updated
+plugin states before saving references to those collected files. Keep `data/`
+with the session when moving it to another location.
+
 ## Workspace
 
 The Workspace is the main arrangement view. Its timeline places audio and MIDI clips along tracks, with a ruler and tempo lane above the arrangement. Use the timeline to position and edit clips against musical time or samples. Tempo and time-signature changes can be placed along the session, and markers help identify important locations. The playhead and transport controls show and control playback; loop, punch, and session ranges define useful timeline regions.
 
 Tracks can contain audio or MIDI material and can be organized in folders. Track controls provide common recording and mix functions such as arm, mute, solo, input monitoring, and level metering. Automation lanes can expose track controls and supported plugin parameters over time. The track area can be filtered and scrolled independently of the timeline.
+
+Drag a track in the left workspace pane to move it. A 20-pixel gap with a yellow border marks the insertion position before the track under the pointer. Release to place the track in that gap. A yellow outline around a folder means the track will be placed inside it. Dropping before a child track places the moved track in the same folder; dropping on empty workspace space moves it to the end of the top-level tracks. Right-click during the drag to cancel.
 
 The mixer sits below the arrangement and provides channel strips with level faders, balance controls, and meters. Its height can be adjusted, and the track, editor, and mixer panels can be shown or hidden to make room for the task at hand. The Workspace also opens focused editors for working with audio and MIDI material.
 
@@ -27,6 +37,8 @@ Double-click a hardware endpoint to open the system port connections for the sel
 Connections can also be opened for a track from Live Session, which is useful for checking its links to other tracks or hardware while performing. Use the full graph to see and manage connections across the session, or the focused view to work with one track's endpoints.
 
 ## Routing
+
+Track and folder templates restore the internal connections saved in the template, including the routing of child tracks. A default input-to-output bypass is restored only when it was saved in the template; an explicitly empty connection list stays disconnected.
 
 Routing describes how signal flows within a track or folder. A track's processing graph contains its input, plugin nodes, and output, joined by audio or MIDI connections. Connect compatible ports to choose the processing order, build parallel paths, or route around a plugin. These links determine how the track processes its signal; connections to other tracks and hardware are managed in Connections View.
 

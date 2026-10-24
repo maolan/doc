@@ -23,6 +23,7 @@
 - `M`: Toggle the Modulators pane
 - `C`: Toggle the Clips pane
 - `X`: Toggle the cut indicator (a vertical guide line showing where a cut would land; only visible in workspace view)
+- `Shift+C`: Close the track's inner connections view when it is open
 
 ### Transport
 
@@ -158,6 +159,11 @@
 - `Drag from port to port`: Create audio or MIDI connection
 - `Select connection + delete`: Remove selected graph connection
 - `Select plugin + delete`: Remove selected plugin instance
+
+### Track Inner Connections
+
+- `Shift+C`: Close the track's inner connections view (same as clicking ×)
+- `Double click track in Connections view`: Return to Workspace and open that track's inner connections
 
 ### Plugin Editors
 

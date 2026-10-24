@@ -7,6 +7,18 @@ The complete Maolan in-house plugin collection. Built in Rust as CLAP plugins wi
 - Iced TokyoNight GUI
 - BSD-2 license
 
+## Presets
+
+Every plugin except the VU meter has a preset bar at the top of its window. Type a
+name and press **Save** to store the current settings, or pick a saved preset from
+the list and press **Load** to recall it. **Delete** removes the selected preset.
+
+Presets are stored as JSON files (`*.mpreset`) in `~/.config/maolan/presets/<plugin>/`.
+Instrument presets capture the complete plugin state — for example a Sampler preset
+includes its zones and instrument files, and a Modeler preset includes the loaded
+NAM model and impulse response paths. The Synth additionally offers Open/Save file
+dialogs and Surge XT `.fxp` import from its own preset bar.
+
 ## Instruments
 
 ### Drums
@@ -195,7 +207,7 @@ Adaptive clipper/limiter with Vintage and Modern variants. Multiple limiting mod
 
 Plugin ID: `rs.maolan.modeler`
 
-Neural Amp Modeler (NAM) plugin. Loads neural network amp models and impulse responses. Includes a noise gate, tone stack (Bass/Mid/Treble), input/output calibration, and DC blocking. Mono I/O.
+Neural Amp Modeler (NAM) plugin. Loads neural network amp models and impulse responses. Includes a noise gate, tone stack (Bass/Mid/Treble), input/output calibration, and DC blocking. Mono I/O. Its Tone3000 browser can search the public catalog or, after logging in with a Tone3000 account, list your own published NAMs and IRs under "My Tones".
 
 ### Parametric EQ
 

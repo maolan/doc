@@ -34,6 +34,12 @@ Replace `/dev/dsp5` with the OSS device ID reported on your system:
 cargo run --bin maolan-calibrate -- --input-device /dev/dsp5 --input-channel 1 --output-device /dev/dsp5 --output-channel 1
 ```
 
+OSS memory-mapped playback uses two timestamped period buffers. Device transfers
+can copy part of a period while plugins process the next block. The selected period
+remains the processing block size; actual round-trip latency also includes queued
+output and device transfer latency. Recalibrate OSS after changing from the previous
+write-ahead scheduling model.
+
 ### macOS (CoreAudio)
 
 CoreAudio device IDs are UIDs. Replace the placeholders with the exact UIDs
@@ -59,6 +65,19 @@ the period the engine actually negotiated:
 cargo run --bin maolan-calibrate -- --input-device "wasapi:Microphone (2- X18/XR18)" --input-channel 3 --output-device "wasapi:Speakers (2- X18/XR18)" --output-channel 1
 ```
 
+### Windows (ASIO)
+
+Use the same `asio:<driver name>` device ID for input and output:
+
+```sh
+cargo run --bin maolan-calibrate -- --input-device "asio:ASIO4ALL v2" --input-channel 1 --output-device "asio:ASIO4ALL v2" --output-channel 1 --periods 64,128,256,512,1024,2048
+```
+
+ASIO device opening waits up to five seconds for the first audio callback
+before calibration starts. USB interfaces can take over a second to begin
+streaming at larger buffer sizes. If no callback arrives, the utility reports
+an ASIO stream startup timeout.
+
 ### Tips
 
 Close other applications using the device before calibrating. The utility
@@ -68,12 +87,13 @@ supported period, it measures for two seconds, applies the calibration, and
 saves the playback lead and recording offset before continuing. A period that
 fails to resolve is reported and skipped.
 
-Defaults are 48,000 Hz, 32-bit audio, two periods, sync mode off, and
+Defaults are 48,000 Hz, 32-bit audio, two periods, sync mode on, and
 exclusive mode on: no other application may use the device while calibrating,
 which keeps the measurement free of mixer interference. Some devices —
 multichannel USB interfaces in particular — reject exclusive streams; when no
 period can be calibrated exclusively, the sweep automatically retries in
-shared mode and says so. Pass `--shared` to allow sharing the device from the
+shared mode and says so. Pass `--no-sync-mode` to measure with sync mode off.
+Pass `--shared` to allow sharing the device from the
 start (on Windows, `--bits` is rejected unless it is 32, WASAPI's only
 format). Use `--rate`, `--bits`, `--nperiods`, `--sync-mode`,
 `--exclusive`, and `--shared` to configure the device; `--gain` adjusts
@@ -88,6 +108,6 @@ output latency totals. On Windows the requested period is first resolved to
 the period the engine negotiates with the device, so the record applies no
 matter which supported period size the DAW requests. On Linux and macOS the
 utility can measure latency, but Maolan does not yet reload saved measurements
-as device latency overrides. Older records from the standalone mmap measurement
-path are ignored; rerun calibration to replace them with records marked
-`engine_io_delay_v1`.
+as device latency overrides. Saved records use the engine IO Delay measurement
+method and do not include a `measurement_path` field. Rerun calibration to
+replace records matching all measured device settings.
