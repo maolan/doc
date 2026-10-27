@@ -18,6 +18,10 @@ independent work can run in parallel while connected tracks retain the
 required processing order. The engine also supports offline rendering, where
 audio can be processed without running against a live device clock.
 
+When opening a session, Maolan keeps the loading screen visible until plugin
+state, connections, clip caches, and the render plan have been restored.
+Playback shortcuts are inactive during loading.
+
 ## Audio backends
 
 The available device backend depends on the operating system:

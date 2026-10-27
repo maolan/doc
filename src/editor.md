@@ -27,8 +27,14 @@ are rejected. Available format details and options may vary by export format.
 ## Standalone and embedded use
 
 As a standalone application, Maolan Edit can open files, play them through a
-configured audio device, edit and save them, and export marker ranges. When
-embedded in Maolan, the editor can open a session audio clip for waveform-based
+configured audio device, edit and save them, and export marker ranges. The
+transport bar has a loop toggle that repeats playback of the current selection,
+or of the whole file when nothing is selected. Ctrl+dragging the edge of a
+selection draws a symmetric inner region — the distance from the selection
+start to the inner start always equals the distance from the inner end to the
+selection end — which the Sampler uses as the loop crossfade. When embedded in
+Maolan, the
+editor can open a session audio clip for waveform-based
 editing. Clip edits are stored as actions in the session and remain
 non-destructive; save the session to keep them. The DAW connects the editor to
 session playback and handles loading the clip, while the standalone application

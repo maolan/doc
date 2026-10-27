@@ -14,6 +14,8 @@ with the session when moving it to another location.
 
 The Workspace is the main arrangement view. Its timeline places audio and MIDI clips along tracks, with a ruler and tempo lane above the arrangement. Use the timeline to position and edit clips against musical time or samples. Tempo and time-signature changes can be placed along the session, and markers help identify important locations. The playhead and transport controls show and control playback; loop, punch, and session ranges define useful timeline regions.
 
+Audio clip waveforms are drawn on a log (dB) scale by default, so quiet material stays visible; toggle **View → Log-scale waveforms** to switch back to linear amplitude rendering. The choice is remembered in the DAW preferences.
+
 Tracks can contain audio or MIDI material and can be organized in folders. Track controls provide common recording and mix functions such as arm, mute, solo, input monitoring, and level metering. Automation lanes can expose track controls and supported plugin parameters over time. The track area can be filtered and scrolled independently of the timeline.
 
 Drag a track in the left workspace pane to move it. A 20-pixel gap with a yellow border marks the insertion position before the track under the pointer. Release to place the track in that gap. A yellow outline around a folder means the track will be placed inside it. Dropping before a child track places the moved track in the same folder; dropping on empty workspace space moves it to the end of the top-level tracks. Right-click during the drag to cancel.
@@ -29,6 +31,8 @@ Use the **+** control in the Master strip to add a scene. Right-click a scene th
 Track strips show the track mixer controls alongside the slots, with a Master strip for the hardware output. Select slots or tracks for keyboard actions, and use MIDI learn to bind MIDI controls to slots or scenes. The track strips scroll horizontally when the session is wider than the window. The matrix references the session's clips, so edits made to a clip are available from both Live Session and the Workspace.
 
 ## Connections View
+
+Scroll over a connections graph to zoom smoothly. The inner graph zooms while hardware and track input/output panels remain fixed. Zoom has no preset minimum or maximum. The toolbar provides zoom in, reset, and zoom out immediately before Workspace, including when a track’s connections are open inside Workspace or Session view. Shift+left-drag on empty canvas pans the inner graph without moving the fixed panels. Shift-drag from a port retains multi-port connection behavior. Reset returns to the default scale and pan position.
 
 Connections View is where you connect separate tracks and hardware ports. Its full graph shows track inputs and outputs alongside the available hardware inputs and outputs. Drag from a compatible output port to an input port to create a route—for example, from a track output to another track's input, from a hardware input to a track for recording, or from the Master output to hardware speakers. Audio and MIDI ports use different colors, and incompatible port types cannot be connected. Click a connection to select it, use Ctrl-click to change the selection, and disconnect selected routes when needed.
 
@@ -58,7 +62,7 @@ The Plugin List is the place to browse and manage the plugins used by a track. M
 
 Audio and MIDI clips are the basic material used in both the arrangement and Live Session. The Clips pane gives you a library view of clips grouped by track, plus an **Unused** group for clips that are not currently placed on a track. Toggle the pane from the Workspace when you want to find or reuse clip material. Drag a clip from the pane onto a compatible track in the arrangement to place it at the playhead. Dropping a clip from the unused pool places that clip; dragging a clip already on a track makes a new copy. You can also drag clips onto Live Session slots to assign them to scenes.
 
-In the arrangement, select and drag clips to move them, or use Ctrl-drag to copy. Drag an edge to change the clip's visible bounds; audio clips can also be stretched with Shift-drag on an edge. Fade handles adjust audio fades. Use the timeline snap setting to align edits to bars, beats, subdivisions, clip edges, or freely. Clips can be renamed from their context menu, and double-clicking a clip opens its focused editor.
+In the arrangement, select and drag clips to move them, or use Ctrl-drag to copy. Drag an edge to change the clip's visible bounds; audio clips can also be stretched with Shift-drag on an edge. New audio clips use 64-sample fade-ins and fade-outs, even when clips overlap. Moving or copying clips preserves their fades. Use fade handles to adjust fades manually. Use the timeline snap setting to align edits to bars, beats, subdivisions, clip edges, or freely. Clips can be renamed from their context menu, and double-clicking a clip opens its focused editor.
 
 Audio clips can be opened in Maolan Edit for waveform work such as selecting a range, applying fades or gain, reversing audio, deleting material, or replacing a selection with silence. The embedded editor keeps edits associated with the session clip; use the editor's undo and redo controls to review changes.
 

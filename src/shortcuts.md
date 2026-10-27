@@ -49,6 +49,7 @@
 ### Audio Editor
 
 - `Escape`: Close the audio editor (same as the toolbar × button); when an editor dialog is open, the dialog is cancelled instead
+- `Ctrl+Left drag selection edge`: Draw the symmetric xfade region inside the selection (used as the loop crossfade by the Sampler)
 
 ## Mouse Actions and Gestures
 
@@ -164,6 +165,7 @@
 
 - `Shift+C`: Close the track's inner connections view (same as clicking ×)
 - `Double click track in Connections view`: Return to Workspace and open that track's inner connections
+- `Shift+left-drag` on empty connections canvas: Pan the inner graph (track and plugin connections)
 
 ### Plugin Editors
 

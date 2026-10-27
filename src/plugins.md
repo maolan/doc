@@ -61,6 +61,7 @@ Polyphonic sample player supporting **SFZ (v1/v2)** and **SoundFont 2 (SF2.01/SF
 - **SoundFont 2 (SF2) Engine:** Parses RIFF SoundFont files with 16-bit and 24-bit PCM sample data, `INFO` metadata, multi-preset bank structures, generator hierarchy merging (`GeneratorSet`), and default/custom `imod` modulators mapped to the modulation matrix.
 - **Background Loading:** Instrument parsing and resample rendering occur asynchronously on a background worker thread. New patches swap into the audio engine atomically (`AtomicArc`) without interrupting active voices or causing audio dropouts.
 - **Interactive GUI:** Supports drag-and-drop file loading, bank/preset dropdown selection, real-time loading progress indicator, instant reload button for SFZ editing, and scrollable diagnostic error logging.
+- **Zone Sample Editor:** Editing a zone opens the embedded Maolan waveform editor. Select a range and use the editor's loop toggle to set the zone's loop region (the whole file when nothing is selected). Ctrl+drag a selection edge to draw the symmetric xfade region inside the selection, which sets the loop crossfade.
 
 ### Synth
 
@@ -72,6 +73,13 @@ Polyphonic synthesizer inspired by Surge XT. Features three oscillators with mul
 modes (including wavetable, FM, and physical-modeling flavors), two multimode filters with
 configurable routing, three envelopes, six LFOs, a 12-slot modulation matrix, an MSEG, a step
 sequencer, noise and waveshaper sections, and microtonal tuning support. Stereo I/O.
+
+The Amp, Filter, and Pitch envelopes use a shaded ADSR graph. Drag the attack peak,
+decay point, or release endpoint horizontally to change its time; drag the sustain
+point vertically to change its level. Times use logarithmic spacing and the sustain
+plateau represents the held note, not a fixed duration. Values appear below the graph.
+Right-click a handle to reset that stage to its default.
+With an LFO assignment armed, click a stage handle or its value to assign that stage.
 
 **Parameter groups**
 
