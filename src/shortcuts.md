@@ -1,36 +1,47 @@
 # Maolan Shortcuts and Gestures
 
+## Platform Conventions
+
+`Mod` means Ctrl on Linux, FreeBSD, and Windows, and Cmd on macOS. On macOS:
+
+- Secondary click means a two-finger trackpad click/tap, Control-click, or the right side of a Magic Mouse. Control+left-drag is also accepted for secondary-drag editing.
+- Option+click or Option+drag replaces middle-click or middle-drag. On clips and notes, Option+click performs the middle-click action while Option+drag copies. In EQ, Option-click toggles Listen and Option-drag adjusts the dynamic target.
+- Option+drag copies clips and notes instead of Ctrl+drag on other platforms.
+- Two-finger scrolling replaces the mouse wheel. Cmd+Left and Cmd+Right are aliases for Home and End.
+
 ## Keyboard Shortcuts
 
 ### Global / Session
 
-- `Ctrl+N`: New session
-- `Ctrl+O`: Open session
-- `Ctrl+S`: Save session
-- `Ctrl+Shift+S`: Save session as
-- `Ctrl+I`: Import files
-- `Ctrl+E`: Open export dialog
-- `Ctrl+T`: Add track
-- `Ctrl+A`: Select all (in pitch-correction view: selects all segments)
-- `Ctrl+R`: Toggle session record arm
-- `Ctrl+L`: Send transport panic / MIDI panic
-- `Ctrl+Z`: Undo
-- `Ctrl+Shift+Z`: Redo
-- `Ctrl+Y`: Redo
+- `Mod+N`: New session
+- `Mod+O`: Open session
+- `Mod+S`: Save session
+- `Mod+Shift+S`: Save session as
+- `Mod+I`: Import files
+- `Mod+E`: Open export dialog
+- `Mod+T`: Add track
+- `Mod+A`: Select all (in pitch-correction view: selects all segments)
+- `Mod+R`: Toggle session record arm
+- `Mod+L`: Send transport panic / MIDI panic
+- `Mod+Z`: Undo
+- `Mod+Shift+Z`: Redo
+- `Mod+Y`: Redo
 - `Delete` or `Backspace`: Remove selected item(s)
 - `Escape`: Cancel or clear the current context-dependent interaction
 - `S`: Toggle the Shortcuts pane
 - `M`: Toggle the Modulators pane
 - `C`: Toggle the Clips pane
 - `X`: Toggle the cut indicator (a vertical guide line showing where a cut would land; only visible in workspace view)
-- `Shift+C`: Close the track's inner connections view when it is open
+- `N`: Create a marker at the playhead
+- `B`: Toggle bypass for the selected plugin
+- `Shift+C`: Close the track's inner connections view or MIDI editor
 
 ### Transport
 
 - `Space`: Toggle play/stop
 - `Shift+Space`: Pause (arrangement); stop all session clips when Session view is focused
-- `Home`: Rewind to start
-- `End`: Rewind to end
+- `Home` or `Cmd+Left` on macOS: Rewind to start
+- `End` or `Cmd+Right` on macOS: Rewind to end
 
 ### Session View
 
@@ -39,6 +50,11 @@
 - `Return`: Launch or stop the selected slot
 - `Shift+Space`: Stop all session clips
 - `Rec to Arr` button: Start recording playing session clips into the arrangement
+- `Left click slot`: Cycle play/stop participation in scene launches
+- `Right click slot`: Clear play/stop participation
+- `Middle click slot`: Clear the clip reference
+- `Right click scene`: Open the rename/remove menu
+- `Double click track strip`: Open the track's connections
 
 ### Piano Tools
 
@@ -49,14 +65,20 @@
 ### Audio Editor
 
 - `Escape`: Close the audio editor (same as the toolbar × button); when an editor dialog is open, the dialog is cancelled instead
-- `Ctrl+Left drag selection edge`: Draw the symmetric xfade region inside the selection (used as the loop crossfade by the Sampler)
+- `Mod+Left drag selection edge`: Draw the symmetric xfade region inside the selection (used as the loop crossfade by the Sampler)
+- `Left click`: Move the playhead; `Left drag`: Select a range
+- `Scroll`: Zoom the waveform in or out around the pointer
+- `Horizontal scrollbar`: Move through the waveform when zoomed in
+- `Double click`: Select the marker region
+- `Right click`: Create a marker
+- `Middle click` near a marker: Delete it; away from a marker: Resize the selection
 
 ## Mouse Actions and Gestures
 
 ### Workspace / Track List
 
 - `Left click track`: Select track
-- `Ctrl+Left click track`: Add track to the current selection
+- `Mod+Left click track`: Add track to the current selection
 - `Double click track`: Open the track plugin/routing graph
 - `Right click track`: Open track context menu
   - Track actions such as automation lanes, rename, sends/returns, MIDI learn, freeze/flatten, and template save depending on track state
@@ -68,7 +90,7 @@
 - `Left click clip`: Select clip
 - `Left click empty editor`: Deselect clips
 - `Left drag clip`: Drag/move clip (or group if multi-selected)
-- `Ctrl + drag clip`: Copy clip while dragging
+- `Ctrl+drag clip` (`Option+drag` on macOS): Copy clip while dragging
 - `Drag clip left/right edge`: Resize clip bounds
 - `Shift + drag clip left/right edge`: Stretch audio clip with the built-in timestretch renderer on drop
 - Snapping is applied during drag-and-drop based on the current snap mode; the "Clips" snap mode enables snapping to other clip start/end positions
@@ -84,7 +106,6 @@
 - `Right click empty marker/header area`: Open the create-marker dialog at the snapped timeline position
 - `Left drag marker`: Move marker horizontally; snapping is applied on drop (supports "Clips" snap mode)
 - `Right click marker`: Rename marker
-- `Middle click marker`: Delete marker
 
 ### Selection Gestures
 
@@ -100,9 +121,9 @@
 
 - `Left click`: Move transport playhead
 - `Left drag`: Set loop range (snap-aware, supports "Clips" snap mode)
-- `Right drag inside loop range`: Move the entire loop range
+- `Middle drag inside loop range`: Move the entire loop range
 - `Middle drag loop edge`: Adjust loop start or end point
-- `Right click`: Clear loop range
+- `Mouse wheel`: Zoom the timeline
 
 ### Zoom Controls
 
@@ -116,16 +137,16 @@
 - `Shift+Left click marker`: Add/remove marker from selection
 - `Left drag selected marker(s)`: Move marker(s) in time (supports "Clips" snap mode)
 - `Left click empty timing lane`: Clear timing selection and move the playhead
-- `Left drag empty timing lane`: Clear timing selection and set punch range (supports "Clips" snap mode)
+- `Left drag empty timing lane`: Clear timing selection and set session or punch range (supports "Clips" snap mode)
 - `Right click marker`: Open marker context menu
   - Duplicate
   - Reset to previous
   - Delete
-- `Right click empty timing lane`: Clear timing selection and clear punch range
-- `Right drag empty timing lane`: Clear timing selection and set punch range (supports "Clips" snap mode)
+- `Right click empty timing lane`: Clear timing selection
 - `Middle click` on tempo lane: Add tempo point (supports "Clips" snap mode)
 - `Middle click` on time-signature lane: Add time-signature point (supports "Clips" snap mode)
-- `Middle drag` an existing punch-range edge: Adjust punch start or end (supports "Clips" snap mode)
+- `Middle drag` inside a session or punch range: Move the range
+- `Middle drag` an existing session or punch-range edge: Adjust its start or end (supports "Clips" snap mode)
 - `Mouse wheel` over left control zone on tempo row: Adjust tempo
 - `Mouse wheel` over left control zone on time-signature row, left half: Adjust numerator
 - `Mouse wheel` over left control zone on time-signature row, right half: Adjust denominator
@@ -151,8 +172,8 @@
 - `Left drag empty area`: Box-select pitch segments
 - `Shift+Left drag empty area`: Add box-selected segments to the current selection
 - `Double click pitch segment`: Snap the clicked segment, or the current selected group, to the nearest semitone
-- `Ctrl+A` in pitch-correction view: Select all segments
-- `Ctrl+Z` / `Ctrl+Shift+Z` / `Ctrl+Y` in pitch-correction view: Undo/redo local pitch-segment edits
+- `Mod+A` in pitch-correction view: Select all segments
+- `Mod+Z` / `Mod+Shift+Z` / `Mod+Y` in pitch-correction view: Undo/redo local pitch-segment edits
 
 ### Plugin Graph
 
@@ -184,7 +205,7 @@ Deleting a clip from a track does not discard it: the clip moves to the "Unused"
 
 ## Notes
 
-- Current keyboard handling is `Ctrl`-based in code paths.
+- Current keyboard handling is `Mod`-based in code paths.
 - Some actions are context-dependent (current view/tool/selection state).
 - The `Q` / `H` / `G` piano shortcuts act on the current piano-roll note selection.
 - In pitch-correction view, undo/redo applies to the local correction editor instead of global engine history until you leave the view or press `Apply`.

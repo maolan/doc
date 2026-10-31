@@ -7,6 +7,8 @@ The complete Maolan in-house plugin collection. Built in Rust as CLAP plugins wi
 - Iced TokyoNight GUI
 - BSD-2 license
 
+On macOS, use Cmd instead of Ctrl for command shortcuts. Secondary click is available as a two-finger trackpad click/tap or Control-click. Option+click/drag replaces middle-click/drag; Control+left-drag is also accepted for secondary-drag editing. In EQ, Option-click toggles Listen and Option-drag adjusts a dynamic target.
+
 ## Presets
 
 Every plugin except the VU meter has a preset bar at the top of its window. Type a
@@ -257,7 +259,35 @@ Modulated all-pass cascade phaser. The LFO sweeps the center frequency of up to 
 
 Plugin ID: `rs.maolan.reverb`
 
-Stereo reverb built from three allpass-like delay blocks with cross-feedback, vibrato predelay, and input/output lowpass filters. Based on Airwindows Reverb.
+Algorithmic reverb with mono or stereo I/O, 22 acoustic modes, and the full-bandwidth NOW color.
+
+| Group | Controls |
+| --- | --- |
+| Reverb | Mix (0–100%), Predelay (0–500 ms), Decay (0.2–70 s) |
+| Shape | Size and Attack (0–100%) |
+| Damping | BassMult (0.25–4×), BassFreq (100–10,000 Hz), HighShelf (−24–0 dB), HighFreq (100–20,000 Hz) |
+| Diffusion | Early and Late (0–100%) |
+| Modulation | Rate (0.1–10 Hz), Depth (0–100%) |
+| EQ | LowCut (10–1,500 Hz), HighCut (100–20,000 Hz) |
+
+Decay controls the midrange decay time; BassMult scales the bass decay below
+BassFreq. HighShelf and HighFreq damp the feedback's high frequencies. Early
+controls input diffusion and Late controls echo-density buildup. Attack spreads
+the onset in time. EQ affects only the wet output. Mix at zero preserves dry audio.
+
+Modes: Concert Hall, Plate, Room, Chamber, Random Space, Chorus Space, Ambience,
+Bright Hall, Sanctuary, Dirty Hall, Dirty Plate, Smooth Plate, Smooth Room,
+Smooth Random, Nonlin, Chaotic Chamber, Chaotic Hall, Chaotic Neutral, Cathedral,
+Palace, Chamber1979, and Hall1984. The DSP implements the recovered mode-specific delay networks, diffusion, modulation,
+damping, and output taps in Rust. NOW is the only color; older saved color values
+are normalized to NOW.
+
+**Lock mix** preserves the current mix when loading a preset. Session recall
+always restores the saved mix and lock setting.
+
+Older sessions and presets select Concert Hall when they contain no valid mode.
+Original-plugin render equivalence has not been established. VintageVerb presets
+are not loaded.
 
 ### Saturator
 
@@ -276,6 +306,13 @@ Plugin ID: `rs.maolan.stereo`
 Multiband stereo width processor with four sections: Gain, Delay, Character, and Output. Uses
 LR4 crossovers and mid/side processing per band. Monitor mode for checking stereo, mono, and
 side signals. Stereo I/O. Best suited for single instruments.
+
+The vectorscope updates continuously. **Polar Sample** plots individual samples on a
+semicircle; **Polar Level** draws rays showing the RMS amplitude of samples in each
+angular bin. Both use a bottom-center origin: mono points upward, left-only and
+right-only signals follow the respective 45-degree guides, and opposite-polarity
+channels fall outside those guides. Angle represents stereo direction independently
+of signal level. **Lissajous** shows the mid/side waveform around the display center.
 
 - **Gain** — per-band width gains (Low/Mid/High), crossover frequencies (X1, X2), and the global
   side Boost.

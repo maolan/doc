@@ -11,7 +11,10 @@ Open an audio file to view its waveform, select a range, and preview playback.
 Edits include fades, gain changes, reverse, deleting a selection, and replacing
 a selection with silence. Changes can be undone and redone. The editor also
 supports moving the playhead, jumping to a zero crossing, and working with
-markers to identify useful regions in a file.
+markers to identify useful regions in a file. Scroll over the waveform to zoom
+in or out around the pointer, up to eight pixels per sample. The timeline above
+the waveform follows the visible time range. When zoomed in, drag the
+horizontal scrollbar below the waveform to move through the file.
 
 Marker ranges can be exported as separate audio files. Export options include
 the output format, bit depth where applicable, and sample rate. The editor can
@@ -29,8 +32,8 @@ are rejected. Available format details and options may vary by export format.
 As a standalone application, Maolan Edit can open files, play them through a
 configured audio device, edit and save them, and export marker ranges. The
 transport bar has a loop toggle that repeats playback of the current selection,
-or of the whole file when nothing is selected. Ctrl+dragging the edge of a
-selection draws a symmetric inner region — the distance from the selection
+or of the whole file when nothing is selected. Ctrl+dragging (Cmd+dragging on
+macOS) the edge of a selection draws a symmetric inner region — the distance from the selection
 start to the inner start always equals the distance from the inner end to the
 selection end — which the Sampler uses as the loop crossfade. When embedded in
 Maolan, the
