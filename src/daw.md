@@ -66,7 +66,7 @@ In the arrangement, select and drag clips to move them, or use Ctrl-drag (Option
 
 Audio clips can be opened in Maolan Edit for waveform work such as selecting a range, applying fades or gain, reversing audio, deleting material, or replacing a selection with silence. The embedded editor keeps edits associated with the session clip; use the editor's undo and redo controls to review changes.
 
-MIDI clips open in the piano roll, where notes can be created, selected, moved, resized, and edited alongside controller lanes. The piano roll supports quantizing, humanizing, and applying groove to selected notes. Audio and MIDI clips can both be launched from Live Session, while the arrangement provides precise placement and editing along the timeline.
+MIDI clips open in the piano roll, where notes can be created, selected, moved, resized, and edited alongside controller lanes. The piano roll supports quantizing, humanizing, and applying groove to selected notes. The MIDI Tools strip provides root and major/minor scale controls; **Hide out-of-scale** hides piano keys and grid rows outside the selected scale and collapses the remaining rows together. Note creation, selection, and dragging follow the visible rows. Hidden notes keep their MIDI data and still play; turn the filter off to see them again. Audio and MIDI clips can both be launched from Live Session, while the arrangement provides precise placement and editing along the timeline.
 
 Grouped clips can keep related material together when arranging or reusing it. The Clips pane avoids listing the same clip more than once when it is referenced in multiple places, so the unused pool and track lists remain easier to scan.
 

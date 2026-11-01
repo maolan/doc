@@ -18,8 +18,7 @@ the list and press **Load** to recall it. **Delete** removes the selected preset
 Presets are stored as JSON files (`*.mpreset`) in `~/.config/maolan/presets/<plugin>/`.
 Instrument presets capture the complete plugin state — for example a Sampler preset
 includes its zones and instrument files, and a Modeler preset includes the loaded
-NAM model and impulse response paths. The Synth additionally offers Open/Save file
-dialogs and Surge XT `.fxp` import from its own preset bar.
+NAM model and impulse response paths.
 
 ## Instruments
 
@@ -65,6 +64,17 @@ Polyphonic sample player supporting **SFZ (v1/v2)** and **SoundFont 2 (SF2.01/SF
 - **Interactive GUI:** Supports drag-and-drop file loading, bank/preset dropdown selection, real-time loading progress indicator, instant reload button for SFZ editing, and scrollable diagnostic error logging.
 - **Zone Sample Editor:** Editing a zone opens the embedded Maolan waveform editor. Select a range and use the editor's loop toggle to set the zone's loop region (the whole file when nothing is selected). Ctrl+drag a selection edge to draw the symmetric xfade region inside the selection, which sets the loop crossfade.
 
+**Parameter groups**
+
+| Group | Description |
+|-------|-------------|
+| Master | Gain, pan |
+| Pitch | Bend up, bend down |
+| Amp EG / Filter EG / EG2–EG5 | Attack, decay, sustain, release |
+| Filter / Filter 2 | Type, subtype, cutoff, resonance, EG amount, key tracking, drive, enable |
+| LFO1–LFO6 | Rate, amount, shape, enable, deform, phase, trigger, unipolar, sync mode |
+| Mod1–Mod6 | Source, target, depth |
+
 ### Synth
 
 ![Synth GUI](images/instruments/synth.png)
@@ -73,10 +83,18 @@ Plugin ID: `rs.maolan.synth`
 
 Polyphonic synthesizer inspired by Surge XT. Features three oscillators with multiple synthesis
 modes (including wavetable, FM, and physical-modeling flavors), two multimode filters with
-configurable routing, three envelopes, six LFOs, a 12-slot modulation matrix, an MSEG, a step
-sequencer, noise and waveshaper sections, and microtonal tuning support. Stereo I/O.
+configurable routing, independent oscillator envelopes and a filter envelope, six LFOs,
+a 12-slot modulation matrix, an MSEG, a step sequencer, noise and per-oscillator shaping,
+and microtonal tuning support. Stereo I/O.
 
-The Amp, Filter, and Pitch envelopes use a shaded ADSR graph. Drag the attack peak,
+Each oscillator has its own shaded ADSR graph. Select Osc 1, Osc 2, or Osc 3 to
+edit that oscillator's attack, decay, sustain, and release. Changing one oscillator's
+envelope does not change the others, and longer release tails continue after the
+other oscillators have finished. The Noise tab retains the amp envelope; the filter
+envelope remains shared. Older sessions and presets initialize all three oscillator
+envelopes from their saved amp envelope.
+
+The envelope graphs support the same editing gestures. Drag the attack peak,
 decay point, or release endpoint horizontally to change its time; drag the sustain
 point vertically to change its level. Times use logarithmic spacing and the sustain
 plateau represents the held note, not a fixed duration. Values appear below the graph.
@@ -87,20 +105,18 @@ With an LFO assignment armed, click a stage handle or its value to assign that s
 
 | Group | Description |
 |-------|-------------|
-| Osc1–Osc3 | Type, octave, semitone, fine, shape, skew, formant, level, unison, sync, sub, routing, solo/mute |
+| Osc1–Osc3 | Type, octave, semitone, fine, shape, skew, level, unison, sync, sub, routing, solo/mute; Osc 3 also has formant |
 | Filter1–Filter2 | Type, subtype, cutoff, resonance, EG amount, key tracking, drive, feedback, enable |
 | Filter | Filter routing and balance |
-| AmpEG / FilterEG / PitchEG | Attack, decay, sustain, release, mode, shapes, retrigger, tempo sync, uber release |
+| Osc1EG–Osc3EG | Independent attack, decay, sustain, and release, with per-stage LFO assignment |
+| AmpEG / FilterEG | Attack, decay, sustain, release, mode, shapes, retrigger, tempo sync, uber release |
 | LFO1–LFO6 | Rate, shape, amount, deform, trigger, sync mode/division, envelope, phase, unipolar |
-| Mod | Fixed mod depths (velocity/key/LFO to filter, mod wheel/aftertouch to filter) |
 | ModRoute1–12 | Source, target, depth, curve |
-| Noise | Type, level, color, filter, stereo, enabled |
-| Waveshaper | Shape, drive, mix, enable |
+| Noise | Type, level, unison voices and stereo spread, color, filter, stereo, enabled |
 | Flavor | Additional filter-like flavor stage |
 | Step Seq | 16 step values, loop start/end, shuffle, trigger targets |
 | MSEG | 128 nodes, 127 segment curves, loop, retrigger targets |
-| Macros | Macro1–8 modulation sources |
-| Master | Volume, pan, width, polyphony, portamento, pitch-bend range, play mode, voice priority |
+| Global | Volume, pan, width, polyphony, portamento, pitch-bend range, play mode, voice priority |
 | Tuning | Scale, root, SCL index |
 | FM / Twist / String / Alias | Oscillator-specific parameters for FM, twist, string, and alias engines |
 
@@ -272,8 +288,9 @@ Algorithmic reverb with mono or stereo I/O, 22 acoustic modes, and the full-band
 
 Decay controls the midrange decay time; BassMult scales the bass decay below
 BassFreq. HighShelf and HighFreq damp the feedback's high frequencies. Early
-controls input diffusion and Late controls echo-density buildup. Attack spreads
-the onset in time. EQ affects only the wet output. Mix at zero preserves dry audio.
+controls diffusion and early-reflection level; Late controls late-reverb level
+and feedback rotation. Attack spreads the onset in time. EQ affects only the wet
+output. Mix at zero preserves dry audio.
 
 Modes: Concert Hall, Plate, Room, Chamber, Random Space, Chorus Space, Ambience,
 Bright Hall, Sanctuary, Dirty Hall, Dirty Plate, Smooth Plate, Smooth Room,
