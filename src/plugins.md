@@ -161,7 +161,7 @@ Sibilance reduction processor. Detects ess sounds via slew-rate patterns across 
 
 Plugin ID: `rs.maolan.delay`
 
-Delay with millisecond or tempo-synced note divisions. Circular buffers with linear interpolation and smooth delay-time chasing. Reads host BPM from CLAP transport.
+Delay with millisecond or tempo-synced note divisions. Circular buffers with linear interpolation and smooth delay-time chasing. Reads host BPM from CLAP transport. The Mode switch selects Normal (independent left/right feedback) or Ping Pong (feedback alternates between channels); Normal is the default.
 
 ### Formant
 
@@ -218,6 +218,32 @@ Stereo flanger with LFO-modulated delay lines and a separate feedback path, port
 | Input Gain | −24.0 ... 24.0 dB | 0.0 | Input gain |
 | Dry/Wet | 0.0 ... 1.0 | 0.5 | Dry/wet mix balance |
 | Output Gain | −24.0 ... 24.0 dB | 0.0 | Output gain |
+
+### Gate
+
+![Limiter GUI](images/effects/gate.png)
+
+Plugin ID: `rs.maolan.gate`
+
+Stereo-linked downward expander and noise gate. The expansion ratio and range allow anything from gentle downward expansion to full gating. Separate open and close thresholds are controlled by Threshold and Hysteresis; Attack, Hold, and Release shape the gain envelope. The detector has high-pass and low-pass filters, and its level, gain reduction, and open/holding/closed state are shown in the GUI.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Threshold | −80.0 ... 0.0 dB | −50.0 dB | Level at which the gate opens |
+| Ratio | 1:1 ... 100:1 | 4:1 | Downward expansion ratio |
+| Range | 0.0 ... 100.0 dB | 80.0 dB | Maximum gain reduction |
+| Attack | 0.01 ... 100 ms | 1 ms | Gate opening time |
+| Hold | 0 ... 500 ms | 50 ms | Minimum time held open after the detector falls below the close threshold |
+| Release | 1 ... 2000 ms | 150 ms | Gain-reduction recovery time |
+| Hysteresis | 0 ... 24 dB | 3 dB | Difference between open and close thresholds |
+| Sidechain HPF | 20 ... 2000 Hz | 20 Hz | Detector high-pass filter |
+| Sidechain LPF | 1 ... 20 kHz | 20 kHz | Detector low-pass filter |
+| External Sidechain | Off / On | Off | Use auxiliary key inputs instead of the main input |
+| Monitor | Off / On | Off | Audition the filtered detector signal |
+
+External Sidechain adds two auxiliary mono inputs (`sc_l` and `sc_r`) and asks the host to rescan audio ports. If valid external buffers are unavailable, the gate safely uses its main input as the detector. Monitor replaces the main output with the filtered detector signal. The plugin introduces no lookahead or latency.
 
 ### Limiter
 
