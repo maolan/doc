@@ -35,17 +35,21 @@
 - `N`: Create a marker at the playhead
 - `B`: Toggle bypass for the selected plugin
 - `Shift+C`: Close the track's inner connections view or MIDI editor
+- `1`: Switch to Workspace view
+- `2`: Switch to Connections view
+- `3`: Switch to Mixer view
+- `4`: Switch to Session view
 
 ### Transport
 
 - `Space`: Toggle play/stop
+- `T`: Toggle metronome
 - `Shift+Space`: Pause (arrangement); stop all session clips when Session view is focused
 - `Home` or `Cmd+Left` on macOS: Rewind to start
 - `End` or `Cmd+Right` on macOS: Rewind to end
 
 ### Session View
 
-- `Tab`: Toggle between Workspace and Session view
 - `↑` / `↓` / `←` / `→`: Navigate selected clip slot
 - `Return`: Launch or stop the selected slot
 - `Shift+Space`: Stop all session clips

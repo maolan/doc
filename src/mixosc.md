@@ -74,6 +74,11 @@ For the strips that support them, the UI shows and updates in real time:
 - Input, bus, main/matrix meters, and RTA (Real-Time Analyzer)
 - Mute
 - Solo
+- X32 channel gate mode, threshold, range, envelope, key source, and key filter
+- Four- and six-band EQ with per-band filter type, frequency, gain, and Q
+- Interactive EQ response graph with draggable band nodes, mouse-wheel Q adjustment, and double-click band reset
+- All eight X32 FX slots, including effect/source selection and every documented effect parameter
+- Channel, bus, matrix, and main inserts with the currently assigned X32 effect and its parameters
 
 The app subscribes to live OSC updates with `/xremote` and meter subscriptions, so local changes on the mixer are reflected back into the UI.
 

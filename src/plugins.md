@@ -2,8 +2,8 @@
 
 The complete Maolan in-house plugin collection. Built in Rust as CLAP plugins with Iced-based GUIs in the TokyoNight theme.
 
-- 23 exported variants
-- 22 distinct products
+- 25 exported variants
+- 24 distinct products
 - Iced TokyoNight GUI
 - BSD-2 license
 
@@ -122,6 +122,22 @@ With an LFO assignment armed, click a stage handle or its value to assign that s
 
 ## Effects
 
+### Bitcrusher
+
+Plugin ID: `rs.maolan.bitcrusher`
+
+Mono or stereo bit-depth and sample-rate reduction. Independent sample-and-hold channels preserve the stereo image. Drive is applied before quantization and clipped to the full-scale range.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Bit Depth | 1 ... 24 bit | 8 bit | Quantization resolution |
+| Downsample | 1 ... 128x | 4x | Number of samples held per quantized value |
+| Drive | 0 ... 24 dB | 0 dB | Input gain before crushing |
+| Dry/Wet | 0 ... 100% | 100% | Original/processed mix |
+| Output Gain | −24 ... 24 dB | 0 dB | Output level |
+
 ### Chorus
 
 ![Chorus GUI](images/effects/chorus.png)
@@ -146,6 +162,8 @@ Multi-voice stereo chorus with modulated delay lines. Even voices read from the 
 Plugin ID: `rs.maolan.compressor`
 
 Multiband compressor with LR4 crossovers. Peak/RMS sidechain, FabFilter Pro-MB-style Compress/Expand modes with signed Range, lookahead, sidechain boost, and classic/modern topology. Double-click the spectrum display to add bands. Drag crossover lines to move splits. Drag the white gain contour to adjust Gain/Makeup for the band under the cursor; middle-drag it to adjust Range; right-drag it to adjust Threshold. Drag the yellow contour to adjust Range directly, or the blue contour to adjust Threshold directly. Negative Range draws below gain and positive Range draws above it.
+
+Enable **External** in the Sidechain section to add auxiliary detector inputs (`sc` in mono or `sc_l`/`sc_r` in stereo). The auxiliary signal drives compression while the main input remains the audible signal. If the auxiliary buffers are unavailable, the compressor falls back to its main input.
 
 ### DeEsser
 
@@ -369,6 +387,23 @@ section switches (Gain, Delay, Character Off/On toggles at the head of each sect
 switches are GUI-only controls; they are not automatable parameters. When both Gain and Delay
 are switched off, the crossover band split is bypassed entirely and the signal goes straight to
 the Character section (or to the output when Character is off as well).
+
+### Transient
+
+Plugin ID: `rs.maolan.transient`
+
+Mono or stereo transient shaper with linked stereo detection. Fast and slow envelope followers distinguish attacks from decay, allowing independent attack and sustain adjustment without changing the dry signal when both gains are zero.
+
+**Parameters**
+
+| Parameter | Range | Default | Description |
+|-----------|-------|---------|-------------|
+| Attack | −24 ... 24 dB | 0 dB | Gain applied to rising transients |
+| Sustain | −24 ... 24 dB | 0 dB | Gain applied to decaying audio |
+| Attack Time | 0.1 ... 20 ms | 1 ms | Fast detector response |
+| Release Time | 10 ... 1000 ms | 100 ms | Slow detector response |
+| Dry/Wet | 0 ... 100% | 100% | Original/processed mix |
+| Output Gain | −24 ... 24 dB | 0 dB | Output level |
 
 ### Tuner
 
