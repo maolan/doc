@@ -124,6 +124,8 @@ With an LFO assignment armed, click a stage handle or its value to assign that s
 
 ### Bitcrusher
 
+![Bitcrusher GUI](images/effects/bitcrusher.png)
+
 Plugin ID: `rs.maolan.bitcrusher`
 
 Mono or stereo bit-depth and sample-rate reduction. Independent sample-and-hold channels preserve the stereo image. Drive is applied before quantization and clipped to the full-scale range.
@@ -389,6 +391,8 @@ are switched off, the crossover band split is bypassed entirely and the signal g
 the Character section (or to the output when Character is off as well).
 
 ### Transient
+
+![Transient GUI](images/effects/transient.png)
 
 Plugin ID: `rs.maolan.transient`
 
